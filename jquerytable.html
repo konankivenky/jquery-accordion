@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="container my-5">
+    <table class="table">
+        <thead>
+            <tr class="table bg-dark text-white">
+                <th>S NO</th>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>PHONE NUMBER</th>
+                <th>ADDRESS</th>
+                <th>VIEW MORE</th>
+                
+            </tr>
+        </thead>
+        <tbody id="content">
+            
+        </tbody>
+    </table>
+</div>
+
+<button class="btn bg-success getdata mx-5"> Get User</button>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script>
+
+        $(".getdata").click(function(){
+            getuser();
+        })
+    
+            function getuser(){
+                    $.ajax({
+                "url":"https://jsonplaceholder.typicode.com/users",
+                "method":"GET",
+                "success":function(res){
+                    prepareList(res);
+                },
+                "error":function(){
+    
+                }
+            })
+        }
+       
+        function prepareList(users){
+            var ele='';
+            users.forEach(function(obj,index){
+                ele='<tr>'+
+                '<td>'+obj.id+'</td>'+
+                '<td>'+obj.name+'</td>'+
+                '<td>'+obj.email+'</td>'+
+                '<td>'+obj.phone+'</td>'+
+                '<td>'+obj.address.city+'</td>'+
+                '<td>'+
+                '<button class="btn bg-info" type="button" onclick="getput('+obj.id+')">'+'Edit'+'</button>'+
+                '</td>'+
+                '</tr>'
+                
+                $("#content").append(ele);
+    
+            })
+        }
+    
+    
+    </script>
